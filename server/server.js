@@ -11,7 +11,7 @@ app.use(parser.urlencoded({
   extended: true
 }));
 
-app.use(express.static(path.resolve(__dirname, './static')));
+app.use(express.static(path.resolve(__dirname, '../static')));
 
 app.listen(PORT, () => {
     console.log('App is listening on PORT:', PORT)
