@@ -1,4 +1,4 @@
-goals:
+project goals:
 have user data and store that data in a db
 use AWS to deploy app
 css and any front end desgin to make it look good
@@ -8,9 +8,9 @@ web sockets/ socket.io to have others spectate game
 authentication - users login to see their past games results
 
 1/21/19
-goal: 
-set up server
-working grid or game board
+goals: 
+set up server ✔️
+working grid or game board ✔️
 review: 
-what is a webpack and how do you write one
+what is a webpack and how do you write one?
 what is body parser?

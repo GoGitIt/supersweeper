@@ -15,10 +15,15 @@ class GameBoard extends React.Component {
     }
 
     handleClick(e) {
-        console.log(e);
+        //console.log(e);
         // var coordinates = e.split(',');
-        console.log(document.getElementById(e));
-        document.getElementById(e).style.visibility = "hidden";
+        //console.log(document.getElementById(e));
+        if (e.split(',').length === 3) {
+            console.log(e)
+            document.getElementById(e).style.visibility = "visible";
+        } else {
+            document.getElementById(e + ',mine').style.visibility = "visible";
+        }
     }
 
     render() {
