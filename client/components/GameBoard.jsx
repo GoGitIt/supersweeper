@@ -16,12 +16,15 @@ class GameBoard extends React.Component {
 
     handleClick(e) {
         console.log(e);
+        // var coordinates = e.split(',');
+        console.log(document.getElementById(e));
+        document.getElementById(e).style.visibility = "hidden";
     }
 
     render() {
         return (<div>
             <h1>Game Board!</h1>
-            {this.state[this.state.level].map((x, i) => <div className={styles.row}>{this.state[this.state.level].map((x, j) => <GameCell onClick={this.handleClick} coordinates={[i, j]}/>)}</div>)}
+            {this.state[this.state.level].map((x, i) => <div className={styles.row}>{this.state[this.state.level].map((x, j) => <GameCell handleClick={this.handleClick} coordinates={[i, j]}/>)}</div>)}
         </div>)
     }
 }

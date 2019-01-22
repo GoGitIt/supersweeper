@@ -7,3 +7,8 @@
 .row {
     display: inline-block
 }
+
+.mine {
+    /* display: none; */
+    visibility: visible;
+}
