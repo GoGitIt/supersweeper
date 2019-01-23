@@ -17,40 +17,50 @@ class GameBoard extends React.Component {
     handleClick(e) {
         console.log(e);
         var coor = e.split(',');
-        var top = [coor[0], coor[1] - 1].toString('');
-        var topRight = [coor[0] + 1, coor[1] - 1].toString('');
-        var right = [coor[0] + 1, coor[1]].toString('');
-        var bottomRight = [coor[0] + 1, coor[1] + 1].toString('');
-        var bottom = [coor[0], coor[1] + 1].toString('');
-        var bottomLeft = [coor[0] - 1, coor[1] + 1].toString('');
-        var left = [coor[0] - 1, coor[1]].toString('');
-        var topLeft = [coor[0] - 1, coor[1] - 1].toString('');
+        var top = [Number(coor[0]), Number(coor[1]) - 1].toString();
+        var topRight = [Number(coor[0]) + 1, Number(coor[1]) - 1].toString();
+        var right = [Number(coor[0]) + 1, Number(coor[1])].toString();
+        var bottomRight = [Number(coor[0]) + 1, Number(coor[1]) + 1].toString();
+        var bottom = [Number(coor[0]), Number(coor[1]) + 1].toString();
+        var bottomLeft = [Number(coor[0]) - 1, Number(coor[1]) + 1].toString();
+        var left = [Number(coor[0]) - 1, Number(coor[1])].toString();
+        var topLeft = [Number(coor[0]) - 1, Number(coor[1]) - 1].toString();
 
         var mineCount = 0;
+        
 
+        console.log('?', coor, left, topLeft, bottom)
         if (document.getElementById(top) && document.getElementById(top +',mine').textContent === 'M') {
             mineCount++;
+            console.log('top')
         }
         if (document.getElementById(topRight) && document.getElementById(topRight +',mine').textContent === 'M') {
             mineCount++;
+            console.log('tr')
         } 
         if (document.getElementById(right) && document.getElementById(right +',mine').textContent === 'M') {
             mineCount++;
+            console.log('r')
         }
         if (document.getElementById(bottomRight) && document.getElementById(bottomRight +',mine').textContent === 'M') {
             mineCount++;
+            console.log('br')
         }
         if (document.getElementById(bottom) && document.getElementById(bottom +',mine').textContent === 'M') {
             mineCount++;
+            console.log('b')
         }
         if (document.getElementById(bottomLeft) && document.getElementById(bottomLeft +',mine').textContent === 'M') {
             mineCount++;
+            console.log('bl')
         }
         if (document.getElementById(left) && document.getElementById(left +',mine').textContent === 'M') {
             mineCount++;
+            console.log('l')
         }
         if (document.getElementById(topLeft) && document.getElementById(topLeft +',mine').textContent === 'M') {
             mineCount++;
+            console.log('tl')
         }
 
         console.log(mineCount)
