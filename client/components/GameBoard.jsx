@@ -9,9 +9,11 @@ class GameBoard extends React.Component {
             level: 'beginner',
             beginner: [1, 2, 3, 4, 5, 6, 8, 9, 10],
             intermediate: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12],
-            expert: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14]
+            expert: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14],
+            zeros: []
         }
         this.handleClick = this.handleClick.bind(this);
+        this.handleZeros = this.handleZeros.bind(this);
     }
 
     handleClick(e) {
@@ -65,6 +67,10 @@ class GameBoard extends React.Component {
 
         console.log(mineCount)
 
+        if(mineCount === 0) {
+            this.handleZeros(coor, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
+        }
+
         if (e.split(',').length === 3) {
             console.log(document.getElementById(e).textContent)
             if (document.getElementById(e).textContent !== "M") {
@@ -77,6 +83,47 @@ class GameBoard extends React.Component {
                 document.getElementById(e + ',mine').textContent = mineCount;
             }
             document.getElementById(e + ',mine').style.visibility = "visible";
+        }
+    }
+
+    handleZeros (coord, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft) {
+        let zerosArr = this.state.zeros;
+        console.log('Accumulating found zeros:', this.state.zeros, 'what is ', top)
+        if(this.state.zeros.includes(coord.join(',')) === false) {
+            zerosArr.push(coord.join(','));
+            console.log('Not seen zero coord')
+            if (document.getElementById(top) && document.getElementById(top + ',mine').textContent !== 'M') {
+                this.handleClick(top);
+                console.log('1')
+            }
+            if (document.getElementById(topRight) && document.getElementById(topRight + ',mine').textContent !== 'M') {
+                this.handleClick(topRight);
+                console.log('2')
+            }
+            if (document.getElementById(right) && document.getElementById(right + ',mine').textContent !== 'M') {
+                this.handleClick(right);
+                console.log('3')
+            }
+            if (document.getElementById(bottomRight) && document.getElementById(bottomRight + ',mine').textContent !== 'M') {
+                this.handleClick(bottomRight);
+                console.log('4')
+            }
+            if (document.getElementById(bottom) && document.getElementById(bottom + ',mine').textContent !== 'M') {
+                this.handleClick(bottom);
+                console.log('5')
+            }
+            if (document.getElementById(bottomLeft) && document.getElementById(bottomLeft + ',mine').textContent !== 'M') {
+                this.handleClick(bottomLeft);
+                console.log('6')
+            }
+            if (document.getElementById(left) && document.getElementById(left + ',mine').textContent !== 'M') {
+                this.handleClick(left);
+                console.log('7')
+            }
+            if (document.getElementById(topLeft) && document.getElementById(topLeft + ',mine').textContent !== 'M') {
+                this.handleClick(topLeft);
+                console.log('8')
+            }
         }
     }
 
