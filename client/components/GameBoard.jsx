@@ -18,72 +18,77 @@ class GameBoard extends React.Component {
 
     handleClick(e) {
         console.log(e);
-        var coor = e.split(',');
-        var top = [Number(coor[0]), Number(coor[1]) - 1].toString();
-        var topRight = [Number(coor[0]) + 1, Number(coor[1]) - 1].toString();
-        var right = [Number(coor[0]) + 1, Number(coor[1])].toString();
-        var bottomRight = [Number(coor[0]) + 1, Number(coor[1]) + 1].toString();
-        var bottom = [Number(coor[0]), Number(coor[1]) + 1].toString();
-        var bottomLeft = [Number(coor[0]) - 1, Number(coor[1]) + 1].toString();
-        var left = [Number(coor[0]) - 1, Number(coor[1])].toString();
-        var topLeft = [Number(coor[0]) - 1, Number(coor[1]) - 1].toString();
 
-        var mineCount = 0;
-        
+        if (document.getElementById(e + ',mine').textContent !== 'M') {
+            var coor = e.split(',');
+            var top = [Number(coor[0]), Number(coor[1]) - 1].toString();
+            var topRight = [Number(coor[0]) + 1, Number(coor[1]) - 1].toString();
+            var right = [Number(coor[0]) + 1, Number(coor[1])].toString();
+            var bottomRight = [Number(coor[0]) + 1, Number(coor[1]) + 1].toString();
+            var bottom = [Number(coor[0]), Number(coor[1]) + 1].toString();
+            var bottomLeft = [Number(coor[0]) - 1, Number(coor[1]) + 1].toString();
+            var left = [Number(coor[0]) - 1, Number(coor[1])].toString();
+            var topLeft = [Number(coor[0]) - 1, Number(coor[1]) - 1].toString();
 
-        console.log('?', coor, left, topLeft, bottom)
-        if (document.getElementById(top) && document.getElementById(top +',mine').textContent === 'M') {
-            mineCount++;
-            console.log('top')
-        }
-        if (document.getElementById(topRight) && document.getElementById(topRight +',mine').textContent === 'M') {
-            mineCount++;
-            console.log('tr')
-        } 
-        if (document.getElementById(right) && document.getElementById(right +',mine').textContent === 'M') {
-            mineCount++;
-            console.log('r')
-        }
-        if (document.getElementById(bottomRight) && document.getElementById(bottomRight +',mine').textContent === 'M') {
-            mineCount++;
-            console.log('br')
-        }
-        if (document.getElementById(bottom) && document.getElementById(bottom +',mine').textContent === 'M') {
-            mineCount++;
-            console.log('b')
-        }
-        if (document.getElementById(bottomLeft) && document.getElementById(bottomLeft +',mine').textContent === 'M') {
-            mineCount++;
-            console.log('bl')
-        }
-        if (document.getElementById(left) && document.getElementById(left +',mine').textContent === 'M') {
-            mineCount++;
-            console.log('l')
-        }
-        if (document.getElementById(topLeft) && document.getElementById(topLeft +',mine').textContent === 'M') {
-            mineCount++;
-            console.log('tl')
-        }
+            var mineCount = 0;
 
-        console.log(mineCount)
 
-        if(mineCount === 0) {
-            this.handleZeros(coor, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
-        }
-
-        if (e.split(',').length === 3) {
-            console.log(document.getElementById(e).textContent)
-            if (document.getElementById(e).textContent !== "M") {
-                document.getElementById(e).textContent = mineCount;
+            console.log('?', coor, left, topLeft, bottom)
+            if (document.getElementById(top) && document.getElementById(top + ',mine').textContent === 'M') {
+                mineCount++;
+                console.log('top')
             }
-            document.getElementById(e).style.visibility = "visible";
+            if (document.getElementById(topRight) && document.getElementById(topRight + ',mine').textContent === 'M') {
+                mineCount++;
+                console.log('tr')
+            }
+            if (document.getElementById(right) && document.getElementById(right + ',mine').textContent === 'M') {
+                mineCount++;
+                console.log('r')
+            }
+            if (document.getElementById(bottomRight) && document.getElementById(bottomRight + ',mine').textContent === 'M') {
+                mineCount++;
+                console.log('br')
+            }
+            if (document.getElementById(bottom) && document.getElementById(bottom + ',mine').textContent === 'M') {
+                mineCount++;
+                console.log('b')
+            }
+            if (document.getElementById(bottomLeft) && document.getElementById(bottomLeft + ',mine').textContent === 'M') {
+                mineCount++;
+                console.log('bl')
+            }
+            if (document.getElementById(left) && document.getElementById(left + ',mine').textContent === 'M') {
+                mineCount++;
+                console.log('l')
+            }
+            if (document.getElementById(topLeft) && document.getElementById(topLeft + ',mine').textContent === 'M') {
+                mineCount++;
+                console.log('tl')
+            }
+
+            console.log(mineCount)
+
+            if (mineCount === 0) {
+                this.handleZeros(coor, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft);
+            }
+
+            if (e.split(',').length === 3) {
+                console.log(document.getElementById(e).textContent)
+                if (document.getElementById(e).textContent !== "M") {
+                    document.getElementById(e).textContent = mineCount;
+                }
+                document.getElementById(e).style.visibility = "visible";
+            } else {
+                console.log(document.getElementById(e + ',mine').textContent)
+                if (document.getElementById(e).textContent !== "M") {
+                    document.getElementById(e + ',mine').textContent = mineCount;
+                }
+                document.getElementById(e + ',mine').style.visibility = "visible";
+            }
         } else {
-            console.log(document.getElementById(e + ',mine').textContent)
-            if (document.getElementById(e).textContent !== "M") {
-                document.getElementById(e + ',mine').textContent = mineCount;
-            }
-            document.getElementById(e + ',mine').style.visibility = "visible";
-        }
+            alert('GAME OVA');
+        } 
     }
 
     handleZeros (coord, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft) {
