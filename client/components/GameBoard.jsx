@@ -14,6 +14,7 @@ class GameBoard extends React.Component {
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleZeros = this.handleZeros.bind(this);
+        this.handleGameOver = this.handleGameOver.bind(this);
     }
 
     handleClick(e) {
@@ -87,8 +88,21 @@ class GameBoard extends React.Component {
                 document.getElementById(e + ',mine').style.visibility = "visible";
             }
         } else {
-            alert('GAME OVA');
+            // alert('GAME OVA');
+            this.handleGameOver();
         } 
+    }
+
+    handleGameOver () {
+        console.log('Game over called')
+        for (let i = 0; i < this.state[this.state.level].length; i++) {
+            for(let j = 0; j < this.state[this.state.level].length; j++) {
+                console.log('Game over coords:', [i, j].toString())
+                if (document.getElementById([i, j].toString() + ',mine').textContent === 'M') {
+                    document.getElementById([i, j].toString() + ',mine').style.visibility = "visible";
+                }
+            }
+        }
     }
 
     handleZeros (coord, top, topRight, right, bottomRight, bottom, bottomLeft, left, topLeft) {
