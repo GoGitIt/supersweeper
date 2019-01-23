@@ -67,9 +67,15 @@ class GameBoard extends React.Component {
 
         if (e.split(',').length === 3) {
             console.log(document.getElementById(e).textContent)
+            if (document.getElementById(e).textContent !== "M") {
+                document.getElementById(e).textContent = mineCount;
+            }
             document.getElementById(e).style.visibility = "visible";
         } else {
             console.log(document.getElementById(e + ',mine').textContent)
+            if (document.getElementById(e).textContent !== "M") {
+                document.getElementById(e + ',mine').textContent = mineCount;
+            }
             document.getElementById(e + ',mine').style.visibility = "visible";
         }
     }
