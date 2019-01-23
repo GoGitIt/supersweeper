@@ -1,20 +1,33 @@
 import React from 'react';
 import styles from '../styles.css';
 import GameCell from './GameCell.jsx';
+import DropDownMenu from './DropDownMenu.jsx';
 
 class GameBoard extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
             level: 'beginner',
-            beginner: [1, 2, 3, 4, 5, 6, 8, 9, 10],
-            intermediate: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12],
-            expert: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14],
+            beginner: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11],
+            intermediate: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13],
+            expert: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15],
             zeros: []
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleZeros = this.handleZeros.bind(this);
         this.handleGameOver = this.handleGameOver.bind(this);
+        this.changeDifficulty = this.changeDifficulty.bind(this);
+    }
+
+    changeDifficulty(e) {
+        console.log('Difficulty:', e)
+        if (e === 'Beginner') {
+            this.setState({level: 'beginner'});
+        } else if (e === 'Intermediate') {
+            this.setState({level: 'intermediate'});
+        } else if (e === 'Expert') {
+            this.setState({level: 'expert'});
+        }
     }
 
     handleClick(e) {
@@ -126,6 +139,7 @@ class GameBoard extends React.Component {
 
     render() {
         return (<div>
+            <DropDownMenu handleClick={this.changeDifficulty}></DropDownMenu>
             <h1>Game Board!</h1>
             {this.state[this.state.level].map((x, i) => <div className={styles.row}>{this.state[this.state.level].map((x, j) => <GameCell handleClick={this.handleClick} coordinates={[i, j]}/>)}</div>)}
         </div>)
