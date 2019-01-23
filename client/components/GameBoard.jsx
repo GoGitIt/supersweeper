@@ -11,7 +11,8 @@ class GameBoard extends React.Component {
             beginner: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11],
             intermediate: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13],
             expert: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15],
-            zeros: []
+            zeros: [],
+            flags: []
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleZeros = this.handleZeros.bind(this);
@@ -138,6 +139,7 @@ class GameBoard extends React.Component {
     }
 
     render() {
+        document.oncontextmenu = () => {return false;};
         return (<div>
             <DropDownMenu handleClick={this.changeDifficulty}></DropDownMenu>
             <h1>Game Board!</h1>
