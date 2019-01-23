@@ -16,8 +16,10 @@ class GameCell extends React.Component {
         if(this.state.mine === true ) {
             return (<div id={this.state.coordinates} className={styles.cell} onClick={(e) => {
                 e.preventDefault();
-                console.log('What click:', e)
                 this.props.handleClick(e.target.id);
+            }} onContextMenu={(e) => {
+                e.preventDefault();
+                this.props.placeFlag(e.target.id);
             }}><div id={this.state.coordinates + ',mine'} className={styles.mine}>
                 M
             </div>
@@ -25,8 +27,10 @@ class GameCell extends React.Component {
         }
         return (<div id={this.state.coordinates} className={styles.cell} onClick={(e) => {
             e.preventDefault();
-            console.log('What click:', e.type)
             this.props.handleClick(e.target.id);
+        }} onContextMenu={(e) => {
+            e.preventDefault();
+            this.props.placeFlag(e.target.id);
         }}>
             <div id={this.state.coordinates + ',mine'} className={styles.mine}>
             

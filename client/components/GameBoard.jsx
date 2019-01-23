@@ -18,6 +18,7 @@ class GameBoard extends React.Component {
         this.handleZeros = this.handleZeros.bind(this);
         this.handleGameOver = this.handleGameOver.bind(this);
         this.changeDifficulty = this.changeDifficulty.bind(this);
+        this.placeFlag = this.placeFlag.bind(this);
     }
 
     changeDifficulty(e) {
@@ -37,7 +38,7 @@ class GameBoard extends React.Component {
             return;
         }
 
-        if (document.getElementById(e + ',mine').textContent !== 'M') {
+        if (document.getElementById(e + ',mine').textContent !== 'M' && this.state.flags.includes(e) === false) {
             var coor = e.split(',');
             var top = [Number(coor[0]), Number(coor[1]) - 1].toString();
             var topRight = [Number(coor[0]) + 1, Number(coor[1]) - 1].toString();
@@ -90,8 +91,23 @@ class GameBoard extends React.Component {
                 }
                 document.getElementById(e + ',mine').style.visibility = "visible";
             }
-        } else if (document.getElementById(e + ',mine').textContent === 'M') {
+        } else if (document.getElementById(e + ',mine').textContent === 'M' && this.state.flags.includes(e) === false) {
             this.handleGameOver();
+        }
+    }
+
+    placeFlag(coords) {
+        if (this.state.flags.includes(coords) === true) {
+            let flag = this.state.flags;
+            let index = flag.indexOf(coords);
+            flag.splice(index, 1);
+            document.getElementById(coords).style.backgroundColor = 'transparent';
+            this.setState({flags: flag});
+        } else if (this.state.flags.includes(coords) === false) {
+            let flag = this.state.flags;
+            flag.push(coords);
+            this.setState({ flags: flag });
+            document.getElementById(coords).style.backgroundColor = 'red';
         }
     }
 
@@ -143,7 +159,7 @@ class GameBoard extends React.Component {
         return (<div>
             <DropDownMenu handleClick={this.changeDifficulty}></DropDownMenu>
             <h1>Game Board!</h1>
-            {this.state[this.state.level].map((x, i) => <div className={styles.row}>{this.state[this.state.level].map((x, j) => <GameCell handleClick={this.handleClick} coordinates={[i, j]}/>)}</div>)}
+            {this.state[this.state.level].map((x, i) => <div className={styles.row}>{this.state[this.state.level].map((x, j) => <GameCell placeFlag={this.placeFlag} handleClick={this.handleClick} coordinates={[i, j]}/>)}</div>)}
         </div>)
     }
 }
